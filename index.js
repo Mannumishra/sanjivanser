@@ -4,9 +4,10 @@ const productRouter = require("./Routes/ProductRouter")
 require("dotenv").config()
 require("./DB/ConnextDb")
 const app = express()
-
+const cors = require("cors")
 app.use(express.json())
 app.set(express.static("./Public"))
+app.use(cors())
 // app.use("/Public", express.static("Public"))   if not use cloudnary the use 
 
 app.use("/api", categoryRouter)

@@ -119,33 +119,35 @@ const updateRecord = async (req, res) => {
             data.productname = req.body.productname ?? data.productname
             data.productdescription = req.body.productdescription ?? data.productdescription
             data.categoryname = req.body.categoryname ?? data.categoryname
-            if (req.files.image) {
-                try {
-                    fs.unlinkSync(data.image)
-                } catch (error) { }
-                const url = await uploadImage(req.files.image[0].path)
-                data.image = url
-            }
-            if (req.files.image1) {
-                try {
-                    fs.unlinkSync(data.image1)
-                } catch (error) { }
-                const url = await uploadImage(req.files.image1[0].path)
-                data.image1 = url
-            }
-            if (req.files.image2) {
-                try {
-                    fs.unlinkSync(data.image2)
-                } catch (error) { }
-                const url = await uploadImage(req.files.image2[0].path)
-                data.image2 = url
-            }
-            if (req.files.image3) {
-                try {
-                    fs.unlinkSync(data.image3)
-                } catch (error) { }
-                const url = await uploadImage(req.files.image3[0].path)
-                data.image3 = url
+            // if (req.files) {
+                if (req.files.image) {
+                    try {
+                        fs.unlinkSync(data.image)
+                    } catch (error) { }
+                    const url = await uploadImage(req.files.image[0].path)
+                    data.image = url
+                }
+                if (req.files.image1) {
+                    try {
+                        fs.unlinkSync(data.image1)
+                    } catch (error) { }
+                    const url = await uploadImage(req.files.image1[0].path)
+                    data.image1 = url
+                }
+                if (req.files.image2) {
+                    try {
+                        fs.unlinkSync(data.image2)
+                    } catch (error) { }
+                    const url = await uploadImage(req.files.image2[0].path)
+                    data.image2 = url
+                }
+                if (req.files.image3) {
+                    try {
+                        fs.unlinkSync(data.image3)
+                    } catch (error) { }
+                    const url = await uploadImage(req.files.image3[0].path)
+                    data.image3 = url
+                // }
             }
             await data.save()
             res.status(200).json({

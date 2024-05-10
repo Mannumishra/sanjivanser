@@ -23,6 +23,11 @@ productRouter.post("/product", upload.fields([
 productRouter.get("/product", getRecord)
 productRouter.get("/product/:_id", getSingleRecord)
 productRouter.delete("/product/:_id", deleteRecord)
-productRouter.put("/product/:_id", upload.single("image"), updateRecord)
+productRouter.put("/product/:_id", upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 }
+]), updateRecord)
 
 module.exports = productRouter

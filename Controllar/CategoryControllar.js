@@ -19,15 +19,16 @@ const uploadImage = async (file) => {
 
 const createRecord = async (req, res) => {
     try {
-        const { name, description } = req.body
-        if (!name || !description) {
+        console.log(req.body)
+        const { categoryname, description } = req.body
+        if (!categoryname || !description) {
             return res.status(401).json({
                 success: false,
                 mess: "Fill All Required Fields"
             })
         }
 
-        const data = new category({ name, description })
+        const data = new category({ categoryname, description })
         if (req.file) {
             const url = await uploadImage(req.file.path)
             data.image = url
@@ -104,7 +105,7 @@ const updateRecord = async (req, res) => {
     try {
         let data = await category.findOne({ _id: req.params._id })
         if (data) {
-            data.name = req.body.name ?? data.name
+            data.categoryname = req.body.categoryname ?? data.categoryname
             data.description = req.body.description ?? data.description
             if (req.file) {
                 try {
